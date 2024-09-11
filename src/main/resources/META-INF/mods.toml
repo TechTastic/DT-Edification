@@ -1,40 +1,37 @@
-license="${license}"
-modLoader="javafml"
-loaderVersion="${forgeRange}"
-issueTrackerURL="${issuesUrl}"
+modLoader="javafml" #mandatory
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
 
 [[mods]]
-modId="${id}"
-version="${version}"
-displayName="${name}"
-updateJSONURL="${updateUrl}"
-displayURL="${url}"
-logoFile=""
-credits="${credits}"
-authors="${authors}"
-description='''
-${description}
-'''
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+#updateJSONURL="https://change.me.example.invalid/updates.json"
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
+#logoFile="examplemod.png"
+#credits=""
+authors="${mod_authors}"
 
-[[dependencies.${id}]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="${mcRange}"
-    ordering="NONE"
-    side="BOTH"
+description='''${mod_description}'''
 
-[[dependencies.${id}]]
+[[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true
-    versionRange="${forgeRange}"
+    versionRange="${forge_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${id}]]
-    modId="dynamictrees"
+[[dependencies.${mod_id}]]
+    modId="minecraft"
     mandatory=true
-    versionRange="${dynamicTreesRange}"
-    ordering="AFTER"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
     side="BOTH"
 
-# Add dependency here for mod add-on is supporting, if applicable.
+[[dependencies.${mod_id}]]
+modId="dynamictrees"
+mandatory=true
+versionRange="[${dynamic_trees_version},)"
+ordering="AFTER"
+side="BOTH"

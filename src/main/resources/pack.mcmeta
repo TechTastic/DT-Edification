@@ -1,6 +1,8 @@
 {
-    "pack": {
-        "description": "DT Addon resources",
-        "pack_format": ${packFormat}
-    }
+  "pack": {
+    "description": {
+      "text": "${mod_id} resources"
+    },
+    "pack_format": 15
+  }
 }
