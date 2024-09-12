@@ -13,7 +13,7 @@
     {
       "name": "dtedification:alt_branches",
       "properties": {
-        "alternative_branch_block": "dtedification:edified_citrine_branch"
+        "type": "CITRINE"
       }
     }
   ]

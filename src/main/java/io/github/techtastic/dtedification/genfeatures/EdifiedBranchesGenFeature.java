@@ -10,55 +10,38 @@ import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguratio
 import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGenerationContext;
 import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGrowContext;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
-import com.ferreusveritas.dynamictrees.tree.species.Species;
-import io.github.techtastic.dtedification.trees.ExtraLogFamily;
+import io.github.techtastic.dtedification.trees.EdifiedFamily;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+public class EdifiedBranchesGenFeature extends GenFeature {
+    public static final ConfigurationProperty<String> TYPE = ConfigurationProperty.string("type");
 
-public class AlternativeLogsGenFeature extends GenFeature {
-    public static final ConfigurationProperty<Block> ALT_BRANCH_BLOCK = ConfigurationProperty.block("alternative_branch_block");
-
-    public AlternativeLogsGenFeature(ResourceLocation registryName) {
+    public EdifiedBranchesGenFeature(ResourceLocation registryName) {
         super(registryName);
     }
 
     @Override
-    public boolean shouldApply(Species species, GenFeatureConfiguration configuration) {
-        Block branch = configuration.get(ALT_BRANCH_BLOCK);
-
-        if (TreeHelper.isBranch(branch) && species.getFamily().isValidBranchBlock((BranchBlock) branch))
-            return true;
-
-        LogManager.getLogger().warn("Failed to find branch block for the alternative branch feature on species {}", species);
-        return false;
-    }
-
-    @Override
     protected void registerProperties() {
-        this.register(ALT_BRANCH_BLOCK, PLACE_CHANCE);
+        this.register(TYPE, PLACE_CHANCE);
     }
 
     @Override
     protected @NotNull GenFeatureConfiguration createDefaultConfiguration() {
         return super.createDefaultConfiguration()
-                .with(ALT_BRANCH_BLOCK, Blocks.AIR)
+                .with(TYPE, "AMETHYST")
                 .with(PLACE_CHANCE, 0.3f);
     }
 
     @Override
     protected boolean postGrow(@NotNull GenFeatureConfiguration configuration, PostGrowContext context) {
-        if (context.fertility() == 0) return false;
+        if (context.fertility() == 0 || !(context.species().getFamily() instanceof EdifiedFamily family)) return false;
 
         LevelAccessor level = context.level();
         BlockPos rootPos = context.pos();
@@ -67,7 +50,7 @@ public class AlternativeLogsGenFeature extends GenFeature {
 
         if (branch != null && context.natural()) {
             if (level.getRandom().nextFloat() < configuration.get(PLACE_CHANCE)) {
-                placeAltBranches(false, configuration, level, rootPos, context.species().getFamily());
+                placeAltBranches(false, configuration, level, rootPos, family);
             }
         }
 
@@ -81,14 +64,14 @@ public class AlternativeLogsGenFeature extends GenFeature {
         final BlockState blockState = level.getBlockState(rootPos.above());
         final BranchBlock branch = TreeHelper.getBranch(blockState);
 
-        if (branch != null) {
-            placeAltBranches(true, configuration, level, rootPos, context.species().getFamily());
+        if (branch != null && context.species().getFamily() instanceof EdifiedFamily family) {
+            placeAltBranches(true, configuration, level, rootPos, family);
         }
 
         return true;
     }
 
-    private void placeAltBranches(boolean isWorldgen, GenFeatureConfiguration configuration, LevelAccessor world, BlockPos rootPos, Family family) {
+    private void placeAltBranches(boolean isWorldgen, GenFeatureConfiguration configuration, LevelAccessor world, BlockPos rootPos, EdifiedFamily family) {
         SimpleWeightedRandomList.Builder<BlockPos> listBuilder = new SimpleWeightedRandomList.Builder<>();
         final FindValidBranchesNode altBranchPlacer = new FindValidBranchesNode(listBuilder, family);
         TreeHelper.startAnalysisFromRoot(world, rootPos, new MapSignal(altBranchPlacer));
@@ -99,16 +82,20 @@ public class AlternativeLogsGenFeature extends GenFeature {
         if (isWorldgen){
             for (BlockPos listPos : validSpots.unwrap().stream().map(WeightedEntry.Wrapper::getData).toList())
                 if (world.getRandom().nextFloat() < configuration.get(PLACE_CHANCE))
-                    placeBranch(configuration, world, listPos);
+                    placeBranch(configuration, world, listPos, family);
         } else {
             WeightedEntry.Wrapper<BlockPos> posWrapper = validSpots.getRandom(world.getRandom()).orElse(null);
             if (posWrapper == null) return;
-            placeBranch(configuration, world, posWrapper.getData());
+            placeBranch(configuration, world, posWrapper.getData(), family);
         }
     }
 
-    private void placeBranch(GenFeatureConfiguration configuration, LevelAccessor world, BlockPos pos) {
-        BranchBlock branchToPlace = (BranchBlock) configuration.get(ALT_BRANCH_BLOCK);
+    private void placeBranch(GenFeatureConfiguration configuration, LevelAccessor world, BlockPos pos, EdifiedFamily family) {
+        BranchBlock branchToPlace = (switch (EdifiedTrees.valueOf(configuration.get(TYPE))) {
+            case AMETHYST -> family.getAmethystBranch();
+            case AVENTURINE -> family.getAventurineBranch();
+            case CITRINE -> family.getCitrineBranch();
+        }).orElse(family.getValidBranchBlock(0));
         int radius = TreeHelper.getRadius(world, pos);
 
         branchToPlace.setRadius(world, pos, radius, null);
@@ -136,5 +123,11 @@ public class AlternativeLogsGenFeature extends GenFeature {
         public boolean returnRun(BlockState state, LevelAccessor level, BlockPos pos, Direction fromDir) {
             return false;
         }
+    }
+
+    public enum EdifiedTrees {
+        AMETHYST,
+        AVENTURINE,
+        CITRINE
     }
 }

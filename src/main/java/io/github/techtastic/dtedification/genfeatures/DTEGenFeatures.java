@@ -7,9 +7,9 @@ import net.minecraft.resources.ResourceLocation;
 import static io.github.techtastic.dtedification.DTEdification.MOD_ID;
 
 public class DTEGenFeatures {
-    public static final GenFeature ALT_BRANCH = new AlternativeLogsGenFeature(new ResourceLocation(MOD_ID, "alt_branches"));
+    public static final GenFeature EDIFIED_BRANCHES = new EdifiedBranchesGenFeature(new ResourceLocation(MOD_ID, "alt_branches"));
 
     public static void register(final Registry<GenFeature> registry) {
-        registry.register(ALT_BRANCH);
+        registry.registerAll(EDIFIED_BRANCHES);
     }
 }
