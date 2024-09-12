@@ -1,0 +1,10 @@
+{
+  "type": "dtedification:extra_logs",
+  "common_leaves": "dtedification:edified_amethyst",
+  "common_species": "dtedification:edified_amethyst",
+  "primitive_log": "hexcasting:edified_log",
+  "primitive_stripped_log": "hexcasting:stripped_edified_log",
+  "max_branch_radius": 24,
+  "generate_surface_root": true,
+  "max_signal_depth": 64
+}

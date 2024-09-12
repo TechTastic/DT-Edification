@@ -1,0 +1,20 @@
+{
+  "family": "dtedification:edified",
+  "tapering": 0.3,
+  "signal_energy": 12.0,
+  "growth_rate": 0.8,
+  "leaves_properties": "dtedification:edified_amethyst",
+  "environment_factors" : {
+  },
+  "perfect_biomes": { "types": [ ] },
+  "generate_seed": false,
+  "generate_sapling": false,
+  "features" : [
+    {
+      "name": "dtedification:alt_branches",
+      "properties": {
+        "alternative_branch_block": "dtedification:edified_amethyst_branch"
+      }
+    }
+  ]
+}
