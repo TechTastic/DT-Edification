@@ -95,6 +95,7 @@ public class EdifiedBranchesGenFeature extends GenFeature {
             case AMETHYST -> family.getAmethystBranch();
             case AVENTURINE -> family.getAventurineBranch();
             case CITRINE -> family.getCitrineBranch();
+            case PURPLE -> family.getPurpleBranch();
         }).orElse(family.getValidBranchBlock(0));
         int radius = TreeHelper.getRadius(world, pos);
 
@@ -128,6 +129,7 @@ public class EdifiedBranchesGenFeature extends GenFeature {
     public enum EdifiedTrees {
         AMETHYST,
         AVENTURINE,
-        CITRINE
+        CITRINE,
+        PURPLE
     }
 }

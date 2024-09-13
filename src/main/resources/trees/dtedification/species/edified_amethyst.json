@@ -4,13 +4,19 @@
   "up_probability": 6,
   "signal_energy": 12.0,
   "growth_rate": 0.8,
+  "lowest_branch_height": 4,
   "leaves_properties": "dtedification:edified_amethyst",
-  "environment_factors" : {
-  },
-  "perfect_biomes": { "types": [ ] },
   "generate_seed": false,
   "generate_sapling": false,
   "features" : [
+    {
+      "name": "roots",
+      "properties": {
+        "min_trunk_radius": 8,
+        "level_limit": 1,
+        "scale_factor": 20
+      }
+    },
     {
       "name": "dtedification:alt_branches",
       "properties": {

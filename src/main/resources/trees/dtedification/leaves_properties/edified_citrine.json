@@ -1,3 +1,4 @@
 {
-  "primitive_leaves": "hexcasting:citrine_edified_leaves"
+  "primitive_leaves": "hexcasting:citrine_edified_leaves",
+  "family": "dtedification:edified"
 }

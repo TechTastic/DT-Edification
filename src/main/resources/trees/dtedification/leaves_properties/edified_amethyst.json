@@ -1,3 +1,4 @@
 {
-  "primitive_leaves": "hexcasting:amethyst_edified_leaves"
+  "primitive_leaves": "hexcasting:amethyst_edified_leaves",
+  "family": "dtedification:edified"
 }
