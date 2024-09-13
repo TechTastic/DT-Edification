@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "OpEdifySaplingMixin",
-    "OpBreakBlockMixin"
+    "OpBreakBlockMixin",
+    "OpTheOnlyReasonAnyoneDownloadedPsiMixin"
   ],
   "client": [],
   "server": [],
