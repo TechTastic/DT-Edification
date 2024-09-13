@@ -1,6 +1,5 @@
 package io.github.techtastic.dtedification.mixin;
 
-import at.petrak.hexcasting.common.casting.actions.spells.OpEdifySapling;
 import at.petrak.hexcasting.common.misc.AkashicTreeGrower;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
