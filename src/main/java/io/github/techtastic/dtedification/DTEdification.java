@@ -1,9 +1,13 @@
 package io.github.techtastic.dtedification;
 
+import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
+import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.mojang.logging.LogUtils;
 import io.github.techtastic.dtedification.init.DTERegistries;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -17,10 +21,17 @@ public class DTEdification {
     public DTEdification() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        modEventBus.addListener(this::gatherData);
+
         MinecraftForge.EVENT_BUS.register(this);
 
         RegistryHandler.setup(MOD_ID);
-
         DTERegistries.setup();
+    }
+
+    private void gatherData(final GatherDataEvent event) {
+        GatherDataHelper.gatherAllData(MOD_ID, event,
+                Family.REGISTRY
+        );
     }
 }

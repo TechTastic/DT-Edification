@@ -1,6 +1,7 @@
 {
   "family": "dtedification:edified",
   "tapering": 0.3,
+  "up_probability": 6,
   "signal_energy": 12.0,
   "growth_rate": 0.8,
   "leaves_properties": "dtedification:edified_citrine",

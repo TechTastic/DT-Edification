@@ -35,16 +35,7 @@ public class EdifiedFamily extends Family {
 
     protected Supplier<BranchBlock> createBranch(ResourceLocation name) {
         return RegistryHandler.addBlock(ResourceLocationUtils.suffix(name, getBranchNameSuffix()),
-                () -> {
-            BasicBranchBlock branch = new BasicBranchBlock(name, this.getProperties());
-            if (name.getPath().contains("amethyst"))
-                branch.setPrimitiveLogDrops(new ItemStack(HexBlocks.EDIFIED_LOG_AMETHYST));
-            else if (name.getPath().contains("aventurine"))
-                branch.setPrimitiveLogDrops(new ItemStack(HexBlocks.EDIFIED_LOG_AVENTURINE));
-            else
-                branch.setPrimitiveLogDrops(new ItemStack(HexBlocks.EDIFIED_LOG_CITRINE));
-            return branch;
-        });
+                () -> new BasicBranchBlock(name, this.getProperties()));
     }
 
     public Optional<BranchBlock> getAmethystBranch() {
@@ -57,5 +48,12 @@ public class EdifiedFamily extends Family {
 
     public Optional<BranchBlock> getCitrineBranch() {
         return Optionals.ofBlock(citrineBranch.get());
+    }
+
+    public EdifiedFamily setupDrops() {
+        this.amethystBranch.get().setPrimitiveLogDrops(new ItemStack(HexBlocks.EDIFIED_LOG_AMETHYST));
+        this.aventurineBranch.get().setPrimitiveLogDrops(new ItemStack(HexBlocks.EDIFIED_LOG_AVENTURINE));
+        this.citrineBranch.get().setPrimitiveLogDrops(new ItemStack(HexBlocks.EDIFIED_LOG_CITRINE));
+        return this;
     }
 }

@@ -36,7 +36,7 @@ public class EdifiedBranchesGenFeature extends GenFeature {
     protected @NotNull GenFeatureConfiguration createDefaultConfiguration() {
         return super.createDefaultConfiguration()
                 .with(TYPE, "AMETHYST")
-                .with(PLACE_CHANCE, 0.3f);
+                .with(PLACE_CHANCE, 0.125f);
     }
 
     @Override
