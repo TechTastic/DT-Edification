@@ -8,6 +8,7 @@
   "leaves_properties": "dtedification:edified_aventurine",
   "generate_seed": false,
   "generate_sapling": false,
+  "always_show_on_waila": true,
   "features" : [
     {
       "name": "roots",

@@ -1,0 +1,11 @@
+{
+  "block.dtedification.edified_branch":"Edified Tree",
+  "block.dtedification.edified_amethyst_branch":"Amethyst Edified Tree",
+  "block.dtedification.edified_aventurine_branch":"Aventurine Edified Tree",
+  "block.dtedification.edified_citrine_branch":"Citrine Edified Tree",
+  "block.dtedification.edified_root":"Edified Roots",
+
+  "species.dtedification.edified_amethyst": "Amethyst Edified Tree",
+  "species.dtedification.edified_aventurine": "Aventurine Edified Tree",
+  "species.dtedification.edified_citrine": "Citrine Edified Tree"
+}
