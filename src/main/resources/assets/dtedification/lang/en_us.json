@@ -7,5 +7,19 @@
 
   "species.dtedification.edified_amethyst": "Amethyst Edified Tree",
   "species.dtedification.edified_aventurine": "Aventurine Edified Tree",
-  "species.dtedification.edified_citrine": "Citrine Edified Tree"
+  "species.dtedification.edified_citrine": "Citrine Edified Tree",
+
+  "dtedification.entry.arbormancy": "The Tree of Knowledge",
+  "dtedification.entry.arbormancy.entry": "Nature's chaotic yet structured forces can be best exemplified by the $(thing)Tree$(). Their patterns and growth a snapshot of the forces at play through out its lifecycle.$(br2)With the help of the Arborists Corps, I have devised $(l:patterns/basic_arbormancy)$(item)several patterns$() that allow us to view and manipulate these $(thing)Trees$() on a deeper level.",
+  "dtedification.entry.arbormancy.explanation": "Of course, with such patterns come new Iotas for referencing Nature's handiwork.$(li)$(bold)$(thing)Tree$() - an iota referencing its Species and JoCode.$(li)$(bold)Species$() - a variant of its Family with unique properties.$(li)$(bold)$(l:https://github.com/DynamicTreesTeam/DynamicTrees/wiki/JoCodes)JoCode$()- a mathematical way to represent tree growth in Base64.$(li)$(bold)Family$() - a set of alike Species with shared properties.",
+
+  "dtedification.entry.basic_arbormancy": "Basic Arbormancy",
+  "hexcasting.action.dtedification:get_tree_at": "Lorax's Purification",
+  "dtedification.page.basic_arbormancy.get_tree_at": "Attempts to get the $(l:basics/arbormancy)Tree$() at the position.",
+  "hexcasting.action.dtedification:get_trees": "Zone Dstl.: Tree",
+  "dtedification.page.basic_arbormancy.get_trees": "Take a position and a radius and gets a list of $(l:basics/arbormancy)Trees$() within the zone.",
+
+  "dtedification.entry.arbormancy_spells": "Arbormancy Spells",
+  "hexcasting.action.dtedification:transform": "Transformation",
+  "dtedification.page.arbormancy_spells.transform": "Given a $(l:basics/arbormancy)Tree$() and a position, attempt to transform the tree at the position into the given $(l:basics/arbormancy)Species$()."
 }

@@ -1,0 +1,26 @@
+{
+  "name": "dtedification.entry.basic_arbormancy",
+  "category": "hexcasting:patterns",
+  "icon": "dynamictrees:staff",
+  "sortnum": 7,
+  "advancement": "hexcasting:root",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "dtedification:get_tree_at",
+      "anchor": "dtedification:get_tree_at",
+      "input": "vec",
+      "output": "tree",
+      "text": "dtedification.page.basic_arbormancy.get_tree_at"
+    },
+    {
+      "type": "hexcasting:pattern",
+      "op_id": "dtedification:get_trees",
+      "anchor": "dtedification:get_trees",
+      "input": "vec, num",
+      "output": "list",
+      "text": "dtedification.page.basic_arbormancy.get_trees"
+    }
+  ]
+}
