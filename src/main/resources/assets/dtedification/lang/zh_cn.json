@@ -1,0 +1,25 @@
+{
+  "block.dtedification.edified_branch":"启迪树",
+  "block.dtedification.edified_amethyst_branch":"晶紫启迪树",
+  "block.dtedification.edified_aventurine_branch":"砂蓝启迪树",
+  "block.dtedification.edified_citrine_branch":"晶黄启迪树",
+  "block.dtedification.edified_root":"启迪树根",
+
+  "species.dtedification.edified_amethyst": "晶紫启迪树",
+  "species.dtedification.edified_aventurine": "砂蓝启迪树",
+  "species.dtedification.edified_citrine": "晶黄启迪树",
+
+  "dtedification.entry.arbormancy": "知识之树",
+  "dtedification.entry.arbormancy.entry": "$(thing)树木$()，自然那混沌又规则的力量的最好体现之一。它们的枝条结构与生长模式即是其生命循环中各方力量在某一瞬间的写照。$(br2)感谢树木研究军团的帮助，我开发了$(l:patterns/basic_arbormancy)$(item)若干图案$()，用于深层次检视和操纵$(thing)树木$()。",
+  "dtedification.entry.arbormancy.explanation": "当然，这些图案也需要全新的 iota 作为记录自然鬼斧神工的手段。$(li)$(bold)$(thing)树木$() - 代表其树种和 JoCode 的 iota。$(li)$(bold)树种$() - 对应树族中具有独特属性的变种。$(li)$(bold)$(l:https://github.com/DynamicTreesTeam/DynamicTrees/wiki/JoCodes)JoCode$()- 以 Base64 格式描述树木生长模式的方式。$(li)$(bold)树族$() - 一系列具有相同属性的相似树种的集合。",
+
+  "dtedification.entry.basic_arbormancy": "基础御木术",
+  "hexcasting.action.dtedification:get_tree_at": "老雷斯之纯化",
+  "dtedification.page.basic_arbormancy.get_tree_at": "获取所给位置的$(l:basics/arbormancy)树木$()。",
+  "hexcasting.action.dtedification:get_trees": "区域之馏化：树木",
+  "dtedification.page.basic_arbormancy.get_trees": "从栈顶获取位置及最大距离，返回该位置给定距离范围内所有$(l:basics/arbormancy)树木$()的列表。",
+
+  "dtedification.entry.arbormancy_spells": "御木法术",
+  "hexcasting.action.dtedification:transform": "树木变形",
+  "dtedification.page.arbormancy_spells.transform": "接受一个$(l:basics/arbormancy)树木$()和一个位置向量，并尝试将该位置处的树木更改为给定$(l:basics/arbormancy)树种$()。"
+}
