@@ -1,20 +1,13 @@
 package io.github.techtastic.dthexcasting.trees;
 
-import at.petrak.hexcasting.common.lib.HexBlocks;
-import com.ferreusveritas.dynamictrees.api.data.BranchStateGenerator;
-import com.ferreusveritas.dynamictrees.api.data.Generator;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
 import com.ferreusveritas.dynamictrees.block.branch.BasicBranchBlock;
 import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
 import com.ferreusveritas.dynamictrees.compat.waila.WailaOther;
-import com.ferreusveritas.dynamictrees.data.provider.DTBlockStateProvider;
-import com.ferreusveritas.dynamictrees.data.provider.DTLangProvider;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
-import com.ferreusveritas.dynamictrees.util.MutableLazyValue;
 import com.ferreusveritas.dynamictrees.util.Optionals;
 import com.ferreusveritas.dynamictrees.util.ResourceLocationUtils;
-import io.github.techtastic.dthexcasting.block.branch.EdifiedAlternativeBranchBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -23,8 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -53,8 +44,9 @@ public class EdifiedFamily extends Family {
     protected Supplier<BranchBlock> createBranch(ResourceLocation name) {
         return RegistryHandler.addBlock(ResourceLocationUtils.suffix(name, getBranchNameSuffix()),
                 () -> {
-                    var branch = new EdifiedAlternativeBranchBlock(name, this.getProperties());
+                    var branch = new BasicBranchBlock(name, this.getProperties());
                     branch.setFamily(this);
+                    branch.setCanBeStripped(true);
                     addValidBranches(branch);
                     return branch;
                 });
