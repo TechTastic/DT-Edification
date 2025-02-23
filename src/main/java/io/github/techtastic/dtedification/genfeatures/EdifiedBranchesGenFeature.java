@@ -58,7 +58,7 @@ public class EdifiedBranchesGenFeature extends GenFeature {
     }
 
     @Override
-    protected boolean postGenerate(GenFeatureConfiguration configuration, PostGenerationContext context) {
+    protected boolean postGenerate(@NotNull GenFeatureConfiguration configuration, PostGenerationContext context) {
         LevelAccessor level = context.level();
         BlockPos rootPos = context.pos();
         final BlockState blockState = level.getBlockState(rootPos.above());

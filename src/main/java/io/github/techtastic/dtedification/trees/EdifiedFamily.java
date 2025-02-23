@@ -1,15 +1,28 @@
 package io.github.techtastic.dtedification.trees;
 
 import at.petrak.hexcasting.common.lib.HexBlocks;
+import com.ferreusveritas.dynamictrees.api.data.BranchStateGenerator;
+import com.ferreusveritas.dynamictrees.api.data.Generator;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
 import com.ferreusveritas.dynamictrees.block.branch.BasicBranchBlock;
 import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
+import com.ferreusveritas.dynamictrees.compat.waila.WailaOther;
+import com.ferreusveritas.dynamictrees.data.provider.DTBlockStateProvider;
+import com.ferreusveritas.dynamictrees.data.provider.DTLangProvider;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
+import com.ferreusveritas.dynamictrees.util.MutableLazyValue;
 import com.ferreusveritas.dynamictrees.util.Optionals;
 import com.ferreusveritas.dynamictrees.util.ResourceLocationUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -40,6 +53,27 @@ public class EdifiedFamily extends Family {
                 () -> new BasicBranchBlock(name, this.getProperties()).setCanBeStripped(true));
     }
 
+    @Override
+    public boolean stripBranch(BlockState state, Level level, BlockPos pos, Player player, ItemStack heldItem) {
+        if (this.hasStrippedBranch()) {
+            BranchBlock branch = state.is(amethystBranch.get()) ? getAmethystBranch().orElse(null) :
+                    state.is(aventurineBranch.get()) ? getAventurineBranch().orElse(null) :
+                            state.is(citrineBranch.get()) ? getCitrineBranch().orElse(null) :
+                                    state.is(purpleBranch.get()) ? getPurpleBranch().orElse(null) :
+                                            getBranch().orElse(null);
+            if (branch != null && !branch.isStrippedBranch()) {
+                branch.stripBranch(state, level, pos, player, heldItem);
+                if (level.isClientSide) {
+                    level.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    WailaOther.invalidateWailaPosition();
+                }
+            }
+            return this.getBranch().isPresent();
+        }
+
+        return false;
+    }
+
     public Optional<BranchBlock> getAmethystBranch() {
         return Optionals.ofBlock(amethystBranch.get());
     }
@@ -54,6 +88,11 @@ public class EdifiedFamily extends Family {
 
     public Optional<BranchBlock> getPurpleBranch() {
         return Optionals.ofBlock(purpleBranch.get());
+    }
+
+    @Override
+    public void generateLangData(DTLangProvider provider) {
+        super.generateLangData(provider);
     }
 
     public EdifiedFamily setupDrops() {

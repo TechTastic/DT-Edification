@@ -8,7 +8,6 @@ import static io.github.techtastic.dtedification.DTEdification.MOD_ID;
 
 public class DTEGenFeatures {
     public static final GenFeature EDIFIED_BRANCHES = new EdifiedBranchesGenFeature(new ResourceLocation(MOD_ID, "alt_branches"));
-
     public static void register(final Registry<GenFeature> registry) {
         registry.registerAll(EDIFIED_BRANCHES);
     }
