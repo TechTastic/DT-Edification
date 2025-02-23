@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import static io.github.techtastic.dthexcasting.DTHexcasting.MOD_ID;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-public class DTERegistries {
+public class DTHRegistries {
 
     public static void setup() {}
 

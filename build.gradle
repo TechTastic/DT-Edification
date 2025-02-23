@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
 }
 
 version = mod_version
@@ -124,6 +125,9 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -152,7 +156,6 @@ dependencies {
 
     implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-$minecraft_version:$dynamic_trees_version")
 
-    compileOnly fg.deobf("at.petra-k.hexcasting:hexcasting-common-${project.minecraft_version}:${project.hexcasting_version}") { transitive = false}
     implementation fg.deobf("at.petra-k.hexcasting:hexcasting-forge-${project.minecraft_version}:${project.hexcasting_version}") { transitive = false }
 
     // // Hex Casting Dependencies
@@ -161,7 +164,7 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version-FORGE-SNAPSHOT")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version-FORGE-SNAPSHOT")
 
-    runtimeOnly "thedarkcolour:kotlinforforge:$project.forge_kotlin_version"
+    implementation "thedarkcolour:kotlinforforge:$project.forge_kotlin_version"
 
     runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:$caelus_version")
 
@@ -169,6 +172,8 @@ dependencies {
 
     // needed for inline to run
     runtimeOnly "me.shedaniel.cloth:cloth-config-forge:$cloth_config_version"
+
+    implementation fg.deobf("${mod_id}:moreiotas-forge:1.20.1-0.1.0-5")
 }
 
 tasks.named('processResources', ProcessResources).configure {
