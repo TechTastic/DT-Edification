@@ -63,8 +63,8 @@ minecraft {
 
 mixin {
     // MixinGradle Settings
-    add sourceSets.main, 'dtedification.mixins.refmap.json'
-    config 'dtedification.mixins.json'
+    add sourceSets.main, 'dthexcasting.mixins.refmap.json'
+    config 'dthexcasting.mixins.json'
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

@@ -1,8 +1,0 @@
-{
-  "loader": "dynamictrees:branch",
-  "textures": {
-    "bark": "hexcasting:block/edified_log",
-    "rings": "hexcasting:block/edified_log_top"
-  },
-  "family": "dtedification:edified"
-}

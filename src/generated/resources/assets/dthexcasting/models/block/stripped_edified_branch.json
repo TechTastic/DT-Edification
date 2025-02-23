@@ -1,0 +1,7 @@
+{
+  "loader": "dynamictrees:branch",
+  "textures": {
+    "bark": "hexcasting:block/stripped_edified_log",
+    "rings": "hexcasting:block/stripped_edified_log_top"
+  }
+}
