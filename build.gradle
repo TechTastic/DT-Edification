@@ -4,6 +4,8 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 version = mod_version
@@ -124,6 +126,9 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -152,7 +157,6 @@ dependencies {
 
     implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-$minecraft_version:$dynamic_trees_version")
 
-    compileOnly fg.deobf("at.petra-k.hexcasting:hexcasting-common-${project.minecraft_version}:${project.hexcasting_version}") { transitive = false}
     implementation fg.deobf("at.petra-k.hexcasting:hexcasting-forge-${project.minecraft_version}:${project.hexcasting_version}") { transitive = false }
 
     // // Hex Casting Dependencies
@@ -161,7 +165,7 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version-FORGE-SNAPSHOT")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:$minecraft_version-$patchouli_version-FORGE-SNAPSHOT")
 
-    runtimeOnly "thedarkcolour:kotlinforforge:$project.forge_kotlin_version"
+    implementation "thedarkcolour:kotlinforforge:$project.forge_kotlin_version"
 
     runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:$caelus_version")
 
@@ -169,6 +173,8 @@ dependencies {
 
     // needed for inline to run
     runtimeOnly "me.shedaniel.cloth:cloth-config-forge:$cloth_config_version"
+
+    implementation fg.deobf("${mod_id}:moreiotas-forge:1.20.1-0.1.0-5")
 }
 
 tasks.named('processResources', ProcessResources).configure {
@@ -192,9 +198,9 @@ tasks.named('jar', Jar).configure {
         attributes([
                 'Specification-Title'     : mod_id,
                 'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1',
+                'Specification-_version'   : '1',
                 'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-_version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
@@ -218,4 +224,59 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+ext.getArtifactId = { platform -> return "$mod_id-$platform-$minecraft_version" }
+
+ext.getLatestChangelog = {
+    Collection<String> lines = file("$rootDir/CHANGELOG.md").readLines()
+    String changelog = ""
+    Boolean atSegment = false
+    for (String line : lines) {
+        if (line.startsWith("## ")) {
+            if (atSegment) break // hit next segment
+            atSegment = true
+        }
+        if (atSegment) changelog += "$line\n"
+    }
+    return changelog.trim()
+}
+
+tasks.register("viewLatestChangelog") {
+    group "documentation"
+    description "Print the topmost single version section from the full CHANGELOG.md file."
+    doLast {
+        println(getLatestChangelog())
+    }
+}
+
+publishMods {
+    file = jar.archiveFile
+    //additionalFiles.from(sourcesJar.archiveFile)
+    changelog = getLatestChangelog()
+    type = STABLE
+    modLoaders.add("forge")
+
+    version = project.version + "-forge"
+    displayName = "HexMapping $project.version [Forge]"
+
+    curseforge {
+        accessToken = project.curseforge_api_token
+        projectId = project.curseforge_id
+        minecraftVersions.add(minecraft_version)
+
+        requires("architectury-api", "kotlin-for-forge", "hexcasting", "moreiotas", "dynamictrees")
+    }
+
+    modrinth {
+        accessToken = project.modrinth_api_token
+        projectId = project.modrinth_id
+        minecraftVersions.add(minecraft_version)
+
+        requires("architectury-api")
+        requires("kotlin-for-forge")
+        requires("hex-casting")
+        requires("moreiotas")
+        requires("dynamictrees")
+    }
 }
