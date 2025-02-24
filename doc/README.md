@@ -2,7 +2,7 @@
 
 Python web book docgen and [hexdoc](https://pypi.org/project/hexdoc) plugin for DTHexcasting.
 
-## Version scheme
+## _version scheme
 
 We use [hatch-gradle-version](https://pypi.org/project/hatch-gradle-version) to generate the version number based on whichever mod version the docgen was built with.
 
