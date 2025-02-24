@@ -43,8 +43,8 @@ missing = [
 ]
 
 [textures.override]
-"dynamictrees:oak_seed" = { texture = "dynamictrees:textures/item/oak_seed.png" }
-"dynamictrees:dark_oak_seed" = { texture = "dynamictrees:textures/item/dark_oak_seed.png" }
+"dynamictrees:oak_seed" = { texture = "dynamictrees/textures/item/oak_seed.png" }
+"dynamictrees:dark_oak_seed" = { texture = "dynamictrees/textures/item/dark_oak_seed.png" }
 
 # platforms
 
