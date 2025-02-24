@@ -265,7 +265,7 @@ publishMods {
         projectId = project.curseforge_id
         minecraftVersions.add(minecraft_version)
 
-        requires("architectury-api", "kotlin-for-forge", "hexcasting", "moreiotas", "dynamictrees")
+        requires("kotlin-for-forge", "hexcasting", "moreiotas", "dynamictrees")
     }
 
     modrinth {
@@ -273,7 +273,6 @@ publishMods {
         projectId = project.modrinth_id
         minecraftVersions.add(minecraft_version)
 
-        requires("architectury-api")
         requires("kotlin-for-forge")
         requires("hex-casting")
         requires("moreiotas")
