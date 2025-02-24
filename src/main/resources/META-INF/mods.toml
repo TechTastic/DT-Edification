@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loader_version="${loader_version_range}"
+loaderVersion="${loader_version_range}"
 license="${mod_license}"
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
 
