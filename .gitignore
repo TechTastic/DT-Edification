@@ -26,5 +26,5 @@ forge*changelog.txt
 
 run-data
 venv
-/_site/dst/docs/
+_site
 .hexdoc/
