@@ -41,14 +41,12 @@ per_world_value = "{^_per_world_value}"
 missing = [
     "dthexcasting:edified_amethyst_branch",
     "dthexcasting:edified_aventurine_branch",
-    "dthexcasting:edified_citrine_branch",
-    "dynamictrees:oak_seed",
-    "dynamictrees:dark_oak_seed"
+    "dthexcasting:edified_citrine_branch"
 ]
 
 [textures.override]
-"dynamictrees:oak_seed" = { texture = "dynamictrees:textures/item/oak_seed.png" }
-"dynamictrees:dark_oak_seed" = { texture = "dynamictrees:textures/item/dark_oak_seed.png" }
+"dynamictrees:oak_seed" = { texture = "minecraft:textures/item/oak_sapling.png" }
+"dynamictrees:dark_oak_seed" = { texture = "minecraft:textures/item/dark_oak_sapling.png" }
 
 # platforms
 
