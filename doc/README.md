@@ -34,7 +34,7 @@ For local testing, create a file called `.env` in the repo root following this t
 ```sh
 GITHUB_REPOSITORY=TechTastic/dthexcasting
 GITHUB_SHA=main
-GITHUB_PAGES_URL=https://techtastic.github.io/hexdthexcasting
+GITHUB_PAGES_URL=https://techtastic.github.io/dthexcasting
 ```
 
 Useful commands:

@@ -3,7 +3,7 @@
 _commit: v0.1.12
 _src_path: gh:hexdoc-dev/hexdoc-hexcasting-template
 author: TechTastic
-book_id: hexmapping:thehexbook
+book_id: hexcasting:thehexbook
 default_branch: main
 github_repo: dthexcasting
 gradle_mod_version_key: mod_version
@@ -12,7 +12,7 @@ hexdoc_plugin_classname: DTHexcastingPlugin
 java_lang:
     ext: java
     src: java
-java_package: io/github/techtastic/hexdthexcasting
+java_package: io/github/techtastic/dthexcasting
 mod_display_name: DTHexcasting
 modid: dthexcasting
 multiloader: false
@@ -20,7 +20,7 @@ package_export_root: doc/src/hexdoc_dthexcasting/_export
 package_name: hexdoc-dthexcasting
 package_slug: hexdoc_dthexcasting
 package_src: doc/src/hexdoc_dthexcasting
-pages_url: https://techtastic.github.io/hexdthexcasting
+pages_url: https://techtastic.github.io/dthexcasting
 pattern_regex:
     per_world_value: 'true'
     regex: make\(\s*"(?P<name>[a-zA-Z0-9_\/]+)",\s*(?:new )?(?:ActionRegistryEntry|OperationAction)\(\s*HexPattern\.fromAngles\(\s*"(?P<signature>[aqweds]+)",\s*HexDir.(?P<startdir>\w+)\)

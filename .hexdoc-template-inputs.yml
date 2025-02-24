@@ -1,5 +1,5 @@
 author: TechTastic
-book_id: "hexmapping:thehexbook"
+book_id: "hexcasting:thehexbook"
 default_branch: main
 github_repo: dthexcasting
 gradle_mod_version_key: mod_version
@@ -8,11 +8,11 @@ hexdoc_plugin_classname: DTHexcastingPlugin
 java_lang:
   ext: java
   src: java
-java_package: io/github/techtastic/hexdthexcasting
+java_package: io/github/techtastic/dthexcasting
 mod_display_name: DTHexcasting
 modid: dthexcasting
 multiloader: false
-pages_url: https://techtastic.github.io/hexdthexcasting
+pages_url: https://techtastic.github.io/dthexcasting
 pattern_regex:
   regex: '(?P<is_per_world>register|registerPerWorld)\(HexPattern\.fromAngles\("(?P<signature>[qweasd]+)",\s*HexDir\.(?P<startdir>\w+)\),\s*"(?P<name>[^"]+)"?'
   per_world_value: registerPerWorld
