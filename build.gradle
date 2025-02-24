@@ -5,6 +5,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.spongepowered.mixin' version '0.7.+'
     id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 version = mod_version
@@ -223,4 +224,59 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+ext.getArtifactId = { platform -> return "$mod_id-$platform-$minecraft_version" }
+
+ext.getLatestChangelog = {
+    Collection<String> lines = file("$rootDir/CHANGELOG.md").readLines()
+    String changelog = ""
+    Boolean atSegment = false
+    for (String line : lines) {
+        if (line.startsWith("## ")) {
+            if (atSegment) break // hit next segment
+            atSegment = true
+        }
+        if (atSegment) changelog += "$line\n"
+    }
+    return changelog.trim()
+}
+
+tasks.register("viewLatestChangelog") {
+    group "documentation"
+    description "Print the topmost single version section from the full CHANGELOG.md file."
+    doLast {
+        println(getLatestChangelog())
+    }
+}
+
+publishMods {
+    file = jar.archiveFile
+    //additionalFiles.from(sourcesJar.archiveFile)
+    changelog = getLatestChangelog()
+    type = STABLE
+    modLoaders.add("forge")
+
+    version = project.version + "-forge"
+    displayName = "HexMapping $project.version [Forge]"
+
+    curseforge {
+        accessToken = project.curseforge_api_token
+        projectId = project.curseforge_id
+        minecraftVersions.add(minecraft_version)
+
+        requires("architectury-api", "kotlin-for-forge", "hexcasting", "moreiotas", "dynamictrees")
+    }
+
+    modrinth {
+        accessToken = project.modrinth_api_token
+        projectId = project.modrinth_id
+        minecraftVersions.add(minecraft_version)
+
+        requires("architectury-api")
+        requires("kotlin-for-forge")
+        requires("hex-casting")
+        requires("moreiotas")
+        requires("dynamictrees")
+    }
 }
