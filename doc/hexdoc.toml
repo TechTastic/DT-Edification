@@ -5,8 +5,8 @@ default_branch = "main"
 
 resource_dirs = [  # top takes priority
     "resources",
-    "{_common.src}/main/resources",
-    { path="{^_common.src}/generated/resources" },
+    "../src/main/resources",
+    { path="../src/generated/resources", required=false },
     { modid="hexcasting" },
     { modid="minecraft" },
     { modid="hexdoc" },
