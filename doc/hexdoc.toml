@@ -30,10 +30,12 @@ show_landing_text = false
 # regexes for parsing pattern registry files - try running copier update and picking a different regex if your patterns aren't loading
 # NOTE: "!Raw" means "don't apply variable interpolation to this value"
 _pattern_regex = { "!Raw"='register\(\s*"(?P<name>[a-zA-Z0-9_\/]+)",\s*\(\)\s*->\s*new ActionRegistryEntry\(HexPattern\.fromAngles\(\s*"(?P<signature>[aqweds]+)",\s*HexDir.(?P<startdir>\w+)\)' }
+_per_world_value = "true"
 
 [[extra.hexcasting.pattern_stubs]]
 path = "{^^^_common.package}/init/DTHActionRegistry.java"
 regex = "{^_pattern_regex}"
+per_world_value = "{^_per_world_value}"
 
 [textures]
 missing = [
