@@ -23,12 +23,10 @@ public class OpBreakBlockMixin {
         BlockState state = instance.getBlockState(blockPos);
         if (state.getBlock() instanceof BranchBlock branch) {
             return branch.removedByEntity(state, instance, blockPos, (LivingEntity) entity);
-        }
-
-        if (state.getBlock() instanceof TrunkShellBlock trunk) {
+        } else if (state.getBlock() instanceof TrunkShellBlock trunk) {
             return trunk.onDestroyedByPlayer(state, instance, blockPos, (Player) entity, true, instance.getFluidState(blockPos));
         }
 
-        return instance.destroyBlock(blockPos, b, entity);
+        return original.call(instance, blockPos, b, entity);
     }
 }
